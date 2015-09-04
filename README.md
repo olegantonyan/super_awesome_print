@@ -1,20 +1,34 @@
 # SuperAwesomePrint
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/super_awesome_print`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Add colored '*********', time and line number around printed value. It's easier to find such output in a long console output.
+```ruby
+"*** 2015-09-04 06:43:26 +0200 ***"
+"app/controllers/deals_controller.rb:6:in `index'"
+{
+            "my" => true,
+    "controller" => "deals",
+        "action" => "index"
+}
+"*** END ***"
+```
+```ruby
+def index
+  sap params
+  @deals = Deal.all
+end
+```
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'super_awesome_print'
+gem 'super_awesome_print', github: 'olegantonyan/super_awesome_print'
 ```
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,7 +36,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Just use `sap` global function to print any variable.
 
 ## Development
 
@@ -38,5 +52,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-# super_awesome_print

@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Oleg Antonyan"]
   spec.email         = ["oleg.b.antonyan@gmail.com"]
 
-  spec.summary       = %q{ Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{ Write a longer description or delete this line.}
-  spec.homepage      = "http://github.com"
+  spec.summary       = %q{Simple wrapper around awesome_print for easier look in long log}
+  spec.description   = %q{Add colored '*********', time and line number around printed value}
+  spec.homepage      = "http://github.com/olegantonyan/super_awesome_printsuper_awesome_print"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
