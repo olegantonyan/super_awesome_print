@@ -1,20 +1,12 @@
 # SuperAwesomePrint
 
 Add colored '*********', time and line number around printed value. It's easier to find such output in a long console output.
-```ruby
-"*** 2015-09-04 06:43:26 +0200 ***"
-"app/controllers/deals_controller.rb:6:in `index'"
-{
-            "my" => true,
-    "controller" => "deals",
-        "action" => "index"
-}
-"*** END ***"
-```
+
+![alt tag](https://cloud.githubusercontent.com/assets/2301579/12552398/45e9fa4c-c37a-11e5-8113-a9014d153ebb.png)
 ```ruby
 def index
-  sap params
-  @deals = Deal.all
+  @posts = Post.all
+  sap @posts
 end
 ```
 
@@ -23,7 +15,7 @@ end
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'super_awesome_print', github: 'olegantonyan/super_awesome_print'
+gem 'super_awesome_print'
 ```
 
 And then execute:
