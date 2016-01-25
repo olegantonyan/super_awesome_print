@@ -3,6 +3,7 @@ require "awesome_print"
 
 def sap msg
   ap "*** #{Time.now} ***", color: {string: :green}
+  ap msg.class if msg.respond_to?(:class)
   src = caller.first.gsub(Rails.root.to_s + '/', '')
   ap src, color: {string: :purpleish}
   ap msg
