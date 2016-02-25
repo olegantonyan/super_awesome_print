@@ -2,14 +2,16 @@ require 'super_awesome_print/version'
 require 'super_awesome_print/configuration'
 require 'awesome_print'
 
-def sap(msg)
-  SuperAwesomePrint.blank_lines_top
-  ap "*** #{Time.now} ***", color: { string: :green }
-  ap msg.class if msg.respond_to?(:class)
-  SuperAwesomePrint.print_caller_lines(caller)
-  ap msg
-  ap '*** END ***', color: { string: :green }
-  SuperAwesomePrint.blank_lines_bottom
+module Kernel
+  def sap(msg)
+    SuperAwesomePrint.blank_lines_top
+    ap "*** #{Time.now} ***", color: { string: :green }
+    ap msg.class if msg.respond_to?(:class)
+    SuperAwesomePrint.print_caller_lines(caller)
+    ap msg
+    ap '*** END ***', color: { string: :green }
+    SuperAwesomePrint.blank_lines_bottom
+  end
 end
 
 module SuperAwesomePrint
