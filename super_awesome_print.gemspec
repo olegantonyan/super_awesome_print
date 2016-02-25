@@ -9,10 +9,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Oleg Antonyan']
   spec.email         = ['oleg.b.antonyan@gmail.com']
 
-  spec.summary       = %q{Simple wrapper around awesome_print for easier look in long log}
-  spec.description   = %q{Add colored '*********', time and line number around printed value}
-  spec.homepage      = "http://github.com/olegantonyan/super_awesome_print"
-  spec.license       = "MIT"
+  spec.summary       = 'Simple wrapper around awesome_print for easier look in long log'
+  spec.description   = "Add colored '*********', time and line number around printed value"
+  spec.homepage      = 'http://github.com/olegantonyan/super_awesome_print'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'
