@@ -26,6 +26,17 @@ Or install it yourself as:
 
     $ gem install super_awesome_print
 
+You can optionally customize configuration in an initializer.<br/>
+In Rails, you can add the following to `config/initializers/super_awesome_print.rb`:
+
+```ruby
+SuperAwesomePrint.configure do |config|
+  config.caller_lines = 3 # defaults to 1
+  config.blank_lines_top = 2 # defaults to 0
+  config.blank_lines_bottom = 2 # defaults to 0
+end
+```
+
 ## Usage
 
 Just use `sap` global function to print any variable.
