@@ -34,6 +34,7 @@ SuperAwesomePrint.configure do |config|
   config.caller_lines = 3 # defaults to 1
   config.blank_lines_top = 2 # defaults to 0
   config.blank_lines_bottom = 2 # defaults to 0
+  config.root_path = Rails.root.to_s # this path will be removed from caller's files path, defaults to Rails.root.to_s
 end
 ```
 
