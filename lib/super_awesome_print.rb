@@ -20,7 +20,7 @@ module SuperAwesomePrint
   def self.print_caller_lines(caller_array)
     number_of_lines = config.caller_lines
     lines = caller_array[0...number_of_lines].map do |line|
-      line.gsub(Rails.root.to_s + '/', '')
+      line.gsub(config.root_path + '/', '')
     end
     lines.each { |line| ap line, color: { string: :purpleish } }
   end
