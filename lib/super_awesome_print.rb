@@ -5,11 +5,11 @@ require 'awesome_print'
 module Kernel
   def sap(msg)
     SuperAwesomePrint.blank_lines_top
-    ap "*** #{Time.now} ***", color: { string: :green }
+    ap "*** #{Time.now} ***", :color => { :string => :green }
     ap msg.class if msg.respond_to?(:class)
     SuperAwesomePrint.print_caller_lines(caller)
     ap msg
-    ap '*** END ***', color: { string: :green }
+    ap '*** END ***', :color => { :string => :green }
     SuperAwesomePrint.blank_lines_bottom
   end
 end
@@ -24,7 +24,7 @@ module SuperAwesomePrint
     lines = caller_array[0...number_of_lines].map do |line|
       line.gsub(config.root_path + '/', '')
     end
-    lines.each { |line| ap line, color: { string: :purpleish } }
+    lines.each { |line| ap line, :color => { :string => :purpleish } }
   end
 
   def self.blank_lines_top
