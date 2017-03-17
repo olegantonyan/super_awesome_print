@@ -14,21 +14,22 @@ module Kernel
   end
 
   def sapf(msg)
-    File.open(SuperAwesomePrint.config.log_file_path , 'a') do |file|
-      file.puts("*** #{Time.now} ***")
-      file.puts(" class: #{msg.class}") if msg.respond_to?(:class)
-      lines = caller[0...SuperAwesomePrint.config.caller_lines].map do |line|
-        root_path = SuperAwesomePrint.config.root_path
-        if root_path.empty?
-          line
-        else
-          line.gsub(root_path + '/', '')
-        end
+    file = File.open(SuperAwesomePrint.config.log_file_path , 'a')
+    file.puts("*** #{Time.now} ***")
+    file.puts(" class: #{msg.class}") if msg.respond_to?(:class)
+    lines = caller[0...SuperAwesomePrint.config.caller_lines].map do |line|
+      root_path = SuperAwesomePrint.config.root_path
+      if root_path.empty?
+        line
+      else
+        line.gsub(root_path + '/', '')
       end
-      lines.each { |l| file.puts(' trace: ' + l) }
-      file.puts(msg.inspect)
-      file.puts('*** END ***')
     end
+    lines.each { |l| file.puts(' trace: ' + l) }
+    file.puts(msg.inspect)
+    file.puts('*** END ***')
+  ensure
+    file.close 
   end
 end
 
