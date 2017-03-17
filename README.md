@@ -35,12 +35,21 @@ SuperAwesomePrint.configure do |config|
   config.blank_lines_top = 2 # defaults to 0
   config.blank_lines_bottom = 2 # defaults to 0
   config.root_path = Rails.root.to_s # this path will be removed from caller's files path, defaults to Rails.root.to_s
+  config.log_file_path = '/some/path/to/log/file' # override default log file for `sapf`
 end
 ```
 
 ## Usage
 
 Just use `sap` global function to print any variable.
+
+You can also print to a file
+
+```ruby
+sapf 'hello world'
+```
+
+By default it will print everything to `sapf.log` file in current directory or to `log/sapf.log` if you're on Rails. See `log_file_path` config option to override this.
 
 ## Development
 
