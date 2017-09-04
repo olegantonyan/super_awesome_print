@@ -51,6 +51,8 @@ sapf 'hello world'
 
 By default it will print everything to `sapf.log` file in current directory or to `log/sapf.log` if you're on Rails. See `log_file_path` config option to override this.
 
+Also, take a look at [cop for RuboCop](https://github.com/olegantonyan/super_awesome_print_rubocop) to make `sap` didn't leak into production.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
