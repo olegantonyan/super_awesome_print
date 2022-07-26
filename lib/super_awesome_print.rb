@@ -11,6 +11,7 @@ module Kernel
     ap msg
     ap '*** END ***', :color => { :string => :green }
     SuperAwesomePrint.blank_lines_bottom
+    msg
   end
 
   def sapf(msg)
@@ -29,7 +30,7 @@ module Kernel
     file.puts(msg.inspect)
     file.puts('*** END ***')
   ensure
-    file.close 
+    file.close
   end
 end
 
