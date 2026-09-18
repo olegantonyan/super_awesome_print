@@ -1,7 +1,4 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'super_awesome_print/version'
+require_relative 'lib/super_awesome_print/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'super_awesome_print'
@@ -9,22 +6,18 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Oleg Antonyan']
   spec.email         = ['oleg.b.antonyan@gmail.com']
 
-  spec.summary       = 'Simple wrapper around awesome_print for easier look in long log'
-  spec.description   = "Add colored '*********', time and line number around printed value"
-  spec.homepage      = 'http://github.com/olegantonyan/super_awesome_print'
+  spec.summary       = 'awesome_print wrapper that makes debug output easy to spot in long logs'
+  spec.description   = 'Prints values with awesome_print, framed by colored markers, a timestamp and the caller location.'
+  spec.homepage      = 'https://github.com/olegantonyan/super_awesome_print'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.required_ruby_version = '>= 2.7'
+
+  spec.files         = Dir['lib/**/*.rb'] + %w[README.md LICENSE.txt]
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake'
+  spec.add_runtime_dependency 'awesome_print'
 
-  if RUBY_VERSION < '1.9.3'
-    spec.add_runtime_dependency 'awesome_print', '1.2.0'
-  else
-    spec.add_runtime_dependency 'awesome_print'
-  end
+  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake'
 end

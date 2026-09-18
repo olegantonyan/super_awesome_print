@@ -3,34 +3,29 @@ require 'super_awesome_print/configuration'
 require 'awesome_print'
 
 module Kernel
+  private
+
   def sap(msg)
     SuperAwesomePrint.blank_lines_top
-    ap "*** #{Time.now} ***", :color => { :string => :green }
-    ap msg.class if msg.respond_to?(:class)
-    SuperAwesomePrint.print_caller_lines(caller)
+    ap "*** #{Time.now} ***", color: { string: :green }
+    ap msg.class
+    SuperAwesomePrint.trace(caller).each { |line| ap line, color: { string: :purpleish } }
     ap msg
-    ap '*** END ***', :color => { :string => :green }
+    ap '*** END ***', color: { string: :green }
     SuperAwesomePrint.blank_lines_bottom
     msg
   end
 
   def sapf(msg)
-    file = File.open(SuperAwesomePrint.config.log_file_path , 'a')
-    file.puts("*** #{Time.now} ***")
-    file.puts(" class: #{msg.class}") if msg.respond_to?(:class)
-    lines = caller[0...SuperAwesomePrint.config.caller_lines].map do |line|
-      root_path = SuperAwesomePrint.config.root_path
-      if root_path.empty?
-        line
-      else
-        line.gsub(root_path + '/', '')
-      end
+    trace = SuperAwesomePrint.trace(caller)
+    File.open(SuperAwesomePrint.config.log_file_path, 'a') do |file|
+      file.puts("*** #{Time.now} ***")
+      file.puts(" class: #{msg.class}")
+      trace.each { |line| file.puts(" trace: #{line}") }
+      file.puts(msg.inspect)
+      file.puts('*** END ***')
     end
-    lines.each { |l| file.puts(' trace: ' + l) }
-    file.puts(msg.inspect)
-    file.puts('*** END ***')
-  ensure
-    file.close
+    msg
   end
 end
 
@@ -39,17 +34,16 @@ module SuperAwesomePrint
     attr_writer :configuration
   end
 
-  def self.print_caller_lines(caller_array)
-    number_of_lines = config.caller_lines
-    lines = caller_array[0...number_of_lines].map do |line|
-      line.gsub(config.root_path + '/', '')
-    end
-    lines.each { |line| ap line, :color => { :string => :purpleish } }
+  def self.trace(backtrace)
+    lines = backtrace.first(config.caller_lines)
+    root = config.root_path.to_s.chomp('/')
+    return lines if root.empty?
+
+    lines.map { |line| line.sub(%r{\A#{Regexp.escape(root)}/}, '') }
   end
 
   def self.blank_lines_top
-    # The first puts has no visible effect
-    # So we want to puts once regardless of config
+    # the first puts has no visible effect, so always print one
     puts
     config.blank_lines_top.times { puts }
   end
@@ -59,7 +53,7 @@ module SuperAwesomePrint
   end
 
   def self.config
-    SuperAwesomePrint.configuration
+    configuration
   end
 
   def self.configuration
